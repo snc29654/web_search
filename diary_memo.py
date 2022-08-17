@@ -86,7 +86,7 @@ def diary_world(request):
     with closing(sqlite3.connect(dbname)) as conn:
         c = conn.cursor()
         create_table = '''create table users (id INTEGER PRIMARY KEY,date varchar(64), name varchar(64),
-                      weather varchar(64), kind varchar(32), Contents varchar(256))'''
+                      weather varchar(64), kind varchar(32), zip_code varchar(64),Contents varchar(256))'''
         #登録済でエラーしないようにごまかします
         try:
             c.execute(create_table)
@@ -96,9 +96,9 @@ def diary_world(request):
             if delkey == "表示":
                 pass
         elif action == "add":#追加
-            insert_sql = 'insert into users (date, name, weather, kind, Contents) values (?,?,?,?,?)'
+            insert_sql = 'insert into users (date, name, weather, kind,zip_code, Contents) values (?,?,?,?,?,?)'
             users = [
-            (date, name, weather, kind, Contents)
+            (date, name, weather, kind, zip_code,Contents)
             ]
             #この場合登録一件ですから、excutemanyでなくてもいいかも？
             #これはpythonでのサポート機能のようで、多量のレコードを一気に登録するときに役立つようです
@@ -119,9 +119,9 @@ def diary_world(request):
             scraping_contents=data_print(scraping_url)
             Contents = str(scraping_contents)
             print(Contents)
-            insert_sql = 'insert into users (date, name, weather, kind, Contents) values (?,?,?,?,?)'
+            insert_sql = 'insert into users (date, name, weather, kind, zip_code,Contents) values (?,?,?,?,?,?)'
             users = [
-            (date, name, weather, kind, Contents)
+            (date, name, weather, kind, zip_code,Contents)
             ]
             c.executemany(insert_sql, users)
         elif action == "delete":#削除
@@ -158,7 +158,7 @@ def diary_world(request):
             data.append("<table border =\"3\">")
             for row in c.execute(select_sql):
                 if all_or_select == "select":
-                    row=row[:5]
+                    row=row[:6]
                 print("row=")
                 print(row)
                 data.append("<tbody><tr><td>")
