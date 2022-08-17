@@ -15,7 +15,7 @@ import pprint
 import webbrowser
 
 
-dbname = '../database.db'
+dbname = '../web_search.db'
 
 zip_code=[]
 
