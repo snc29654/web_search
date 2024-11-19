@@ -44,7 +44,7 @@ def  data_print(url):
 def diary_world(request):
     global zip_code
 
-    print(request.params)
+    #print(request.params)
     in_data=request.params
     date=in_data["date"]
     today = datetime.date.today()
@@ -67,7 +67,7 @@ def diary_world(request):
     kind = ''.join(kind.split())
     Contents=in_data["Contents"]
 
-    print(Contents)
+    #print(Contents)
     Contents = ''.join(Contents.split())
     if ('<' in Contents) == True:
         return Response(str("<は許されない文字です"))
@@ -114,11 +114,11 @@ def diary_world(request):
             if kind =="未入力":
                 kind = scraping_url
 
-            print("●●●●●●●●●●●●●●●●●●●●●●●●●")
-            print(scraping_url)
+            #print("●●●●●●●●●●●●●●●●●●●●●●●●●")
+            #print(scraping_url)
             scraping_contents=data_print(scraping_url)
             Contents = str(scraping_contents)
-            print(Contents)
+            #print(Contents)
             insert_sql = 'insert into users (date, name, weather, kind, zip_code,Contents) values (?,?,?,?,?,?)'
             users = [
             (date, name, weather, kind, zip_code,Contents)
@@ -147,20 +147,20 @@ def diary_world(request):
         elif action == "lastview":#最後キー表示
             select_sql = 'select * from users where id in ( select max( id ) from users )'
         elif action == "kindview":#種類検索
-            print(kind)
+            #print(kind)
             select_sql = 'select * from users where kind like '+ '"%'+str(kind)+'%"'
         else:
         #全レコード表示
             select_sql = 'select * from users'
         data=[]
-        print (select_sql )
+        #print (select_sql )
         try:
             data.append("<table border =\"3\">")
             for row in c.execute(select_sql):
                 if all_or_select == "select":
                     row=row[:6]
-                print("row=")
-                print(row)
+                #print("row=")
+                #print(row)
                 data.append("<tbody><tr><td>")
                 data.append(row)
                 data.append("</tbody></tr></td>")
@@ -168,7 +168,7 @@ def diary_world(request):
                 data.append("<br>")
                 data.append("</td></tr>")
             conn.commit()
-            print(str(data))
+            #print(str(data))
         except:
             print("data not found")
     if action == "scrape":        
