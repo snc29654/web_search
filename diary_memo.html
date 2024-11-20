@@ -21,19 +21,17 @@
           <div>   検索ワード（内容から検索） <input type="text" name="match_word"></div>
           <div>   削除キー <input id="ex_box" input type="text" name="delkey" disabled /></div>
           <div>   <input type="hidden" size="50" name="scraping_url" value=""></div>
-          <div>   ニュースキーワード <input type="text" size="20" name="zip_code" value="MLB"></div>
+          <div>   ネット検索ワード <input type="text" size="20" name="zip_code" value="MLB"></div>
             <br>
           </p>
             <select name="action" id="action">
             <option value="scrape">yahoo search</option>
             <option value="view">全表示</option>
-            <option value="add">追加登録</option>
-            <option value="delete">指定キー削除</option>
-            <option value="srch">検索ワード表示</option>
-            <option value="count">検索ワード件数</option>
+            <option value="delete">指定キー(DBが採番したキー）削除</option>
+            <option value="srch">検索ワード表示（過去の検索結果から）</option>
+            <option value="count">検索ワード件数（過去の検索結果から）</option>
             <option value="today">本日登録分表示</option>
-            <option value="keyview">指定キー表示</option>
-            <option value="kindview">題名検索</option>
+            <option value="keyview">指定キー(DBが採番したキー）表示</option>
             <option value="lastview">最後のレコード</option>
             <option value="delall">全削除</option>
             </select>
